@@ -1,0 +1,4461 @@
+{
+   "openapi": "3.0.0",
+   "paths": {
+       "/ticket": {
+           "post": {
+               "operationId": "TicketController_create",
+               "summary": "Submit a new ticket",
+               "description": "This endpoint allows you to create a new ticket.",
+               "parameters": [],
+               "requestBody": {
+                   "required": true,
+                   "content": {
+                       "application/json": {
+                           "schema": {
+                               "$ref": "#/components/schemas/CreateTicketDto"
+                           }
+                       }
+                   }
+               },
+               
+               "servers": [
+                   {
+                       "url": "https://tickets-api.macaan.ai/"
+                   }, { "url": "https://tickets-api.dev.macaan.ai/" }
+               ],
+               "responses": {
+                   "200": {
+                       "description": "",
+                       "content": {
+                           "application/json": {
+                               "example": {
+                                   "data": {
+                                       "id": 1,
+                                       "user_id": 1,
+                                       "part_id": "Part Number",
+                                       "model_id": "Model Number",
+                                       "ticket_text": "Question submitted by user",
+                                       "visibility": "Public",
+                                       "status": "Pending",
+                                       "created_at": "2023-12-31T19:00:00.000Z",
+                                       "site_id": 32,
+                                       "site_product_id": 453,
+                                       "type": "ticket"
+                                   }
+                               }
+                           }
+                       }
+                   },
+                   "401": {
+                       "description": "",
+                       "content": {
+                           "application/json": {
+                               "example": {
+                                   "message": "Unauthorized",
+                                   "statusCode": 401
+                               }
+                           }
+                       }
+                   }
+               },
+               "tags": [
+                   "Create Ticket"
+               ],
+               "security": [
+                   {
+                       "bearer": []
+                   }
+               ]
+           }
+       },
+       "/ticket/model/{model_number}": {
+           "get": {
+               "operationId": "TicketController_findManyByModel",
+               "summary": "Find tickets by model number",
+               "description": "This endpoint allows you to get all tickets against a model number.",
+               "parameters": [
+                   {
+                       "name": "model_number",
+                       "required": true,
+                       "in": "path",
+                       "schema": {
+                           "type": "string"
+                       }
+                   }
+               ],
+               
+               "servers": [
+                   {
+                       "url": "https://tickets-api.macaan.ai/"
+                   }, { "url": "https://tickets-api.dev.macaan.ai/" }
+               ],
+               "responses": {
+                   "200": {
+                       "description": "",
+                       "content": {
+                           "application/json": {
+                               "example": [
+                                   {
+                                       "id": 21,
+                                       "user_id": 9,
+                                       "part_id": "Part Number",
+                                       "model_id": "Model Number",
+                                       "ticket_text": "Question submitted by user",
+                                       "visibility": "Public",
+                                       "status": "Publish",
+                                       "created_at": "2024-01-01T00:00:00.000Z",
+                                       "site_id": 32,
+                                       "site_product_id": 453,
+                                       "type": "ticket",
+                                       "comments": [
+                                           {
+                                               "id": 179,
+                                               "ticket_id": 21,
+                                               "user_id": 1,
+                                               "comment_text": "Hello John, Thank you for reaching out.",
+                                               "draft": false,
+                                               "type": "comment",
+                                               "timestamp": "2024-05-30T14:06:02.347Z",
+                                               "related_parts": [],
+                                               "video_links": [],
+                                               "user": {
+                                                   "name": "Service Agent",
+                                                   "user_type": "agent"
+                                               }
+                                           }
+                                       ],
+                                       "user": {
+                                           "name": "Client User",
+                                           "user_type": "user"
+                                       }
+                                   }
+                               ]
+                           }
+                       }
+                   },
+                   "401": {
+                       "description": "",
+                       "content": {
+                           "application/json": {
+                               "example": {
+                                   "message": "Unauthorized",
+                                   "statusCode": 401
+                               }
+                           }
+                       }
+                   }
+               },
+               "tags": [
+                   "Find Tickets"
+               ],
+               "security": [
+                   {
+                       "bearer": []
+                   }
+               ]
+           }
+       },
+       "/ticket/part/{part_number}": {
+           "get": {
+               "operationId": "TicketController_findManyByPart",
+               "summary": "Find tickets by part number",
+               "description": "This endpoint allows you to get all tickets against a part number.",
+               "parameters": [
+                   {
+                       "name": "part_number",
+                       "required": true,
+                       "in": "path",
+                       "schema": {
+                           "type": "string"
+                       }
+                   }
+               ],
+               
+               "servers": [
+                   {
+                       "url": "https://tickets-api.macaan.ai/"
+                   }, { "url": "https://tickets-api.dev.macaan.ai/" }
+               ],
+               "responses": {
+                   "200": {
+                       "description": "",
+                       "content": {
+                           "application/json": {
+                               "example": [
+                                   {
+                                       "id": 21,
+                                       "user_id": 9,
+                                       "part_id": "Part Number",
+                                       "model_id": "Model Number",
+                                       "ticket_text": "Question submitted by user",
+                                       "visibility": "Public",
+                                       "status": "Publish",
+                                       "created_at": "2024-01-01T00:00:00.000Z",
+                                       "site_id": 32,
+                                       "site_product_id": 453,
+                                       "type": "ticket",
+                                       "comments": [
+                                           {
+                                               "id": 179,
+                                               "ticket_id": 21,
+                                               "user_id": 1,
+                                               "comment_text": "Hello John, Thank you for reaching out.",
+                                               "draft": false,
+                                               "type": "comment",
+                                               "timestamp": "2024-05-30T14:06:02.347Z",
+                                               "related_parts": [],
+                                               "video_links": [],
+                                               "user": {
+                                                   "name": "Service Agent",
+                                                   "user_type": "agent"
+                                               }
+                                           }
+                                       ],
+                                       "user": {
+                                           "name": "Client User",
+                                           "user_type": "user"
+                                       }
+                                   }
+                               ]
+                           }
+                       }
+                   },
+                   "401": {
+                       "description": "",
+                       "content": {
+                           "application/json": {
+                               "example": {
+                                   "message": "Unauthorized",
+                                   "statusCode": 401
+                               }
+                           }
+                       }
+                   }
+               },
+               "tags": [
+                   "Find Tickets"
+               ],
+               "security": [
+                   {
+                       "bearer": []
+                   }
+               ]
+           }
+       },
+       "/ticket/site/{id}": {
+           "get": {
+               "operationId": "TicketController_findManyBySite",
+               "summary": "Find tickets by website",
+               "description": "This endpoint allows you to get all tickets submitted on your site.",
+               "parameters": [
+                   {
+                       "name": "id",
+                       "required": true,
+                       "in": "path",
+                       "schema": {
+                           "type": "number"
+                       }
+                   }
+               ],
+               
+               "servers": [
+                   {
+                       "url": "https://tickets-api.macaan.ai/"
+                   }, { "url": "https://tickets-api.dev.macaan.ai/" }
+               ],
+               "responses": {
+                   "200": {
+                       "description": "",
+                       "content": {
+                           "application/json": {
+                               "example": [
+                                   {
+                                       "id": 21,
+                                       "user_id": 9,
+                                       "part_id": "Part Number",
+                                       "model_id": "Model Number",
+                                       "ticket_text": "Question submitted by user",
+                                       "visibility": "Public",
+                                       "status": "Publish",
+                                       "created_at": "2024-01-01T00:00:00.000Z",
+                                       "site_id": 32,
+                                       "site_product_id": 453,
+                                       "type": "ticket",
+                                       "comments": [
+                                           {
+                                               "id": 179,
+                                               "ticket_id": 21,
+                                               "user_id": 1,
+                                               "comment_text": "Hello John, Thank you for reaching out.",
+                                               "draft": false,
+                                               "type": "comment",
+                                               "timestamp": "2024-05-30T14:06:02.347Z",
+                                               "related_parts": [],
+                                               "video_links": [],
+                                               "user": {
+                                                   "name": "Service Agent",
+                                                   "user_type": "agent"
+                                               }
+                                           }
+                                       ],
+                                       "user": {
+                                           "name": "Client User",
+                                           "user_type": "user"
+                                       }
+                                   }
+                               ]
+                           }
+                       }
+                   },
+                   "401": {
+                       "description": "",
+                       "content": {
+                           "application/json": {
+                               "example": {
+                                   "message": "Unauthorized",
+                                   "statusCode": 401
+                               }
+                           }
+                       }
+                   }
+               },
+               "tags": [
+                   "Find Tickets"
+               ],
+               "security": [
+                   {
+                       "bearer": []
+                   }
+               ]
+           }
+       },
+       "/ticket/site/{id}/product/{product_id}": {
+           "get": {
+               "operationId": "TicketController_findManyBySiteProduct",
+               "summary": "Find tickets on website by product id",
+               "description": "This endpoint allows you to get all tickets of a product on your website using the product ID you sent while creating a ticket.",
+               "parameters": [
+                   {
+                       "name": "id",
+                       "required": true,
+                       "in": "path",
+                       "schema": {
+                           "type": "number"
+                       }
+                   },
+                   {
+                       "name": "product_id",
+                       "required": true,
+                       "in": "path",
+                       "schema": {
+                           "type": "number"
+                       }
+                   }
+               ],
+               
+               "servers": [
+                   {
+                       "url": "https://tickets-api.macaan.ai/"
+                   }, { "url": "https://tickets-api.dev.macaan.ai/" }
+               ],
+               "responses": {
+                   "200": {
+                       "description": "",
+                       "content": {
+                           "application/json": {
+                               "example": [
+                                   {
+                                       "id": 21,
+                                       "user_id": 9,
+                                       "part_id": "Part Number",
+                                       "model_id": "Model Number",
+                                       "ticket_text": "Question submitted by user",
+                                       "visibility": "Public",
+                                       "status": "Publish",
+                                       "created_at": "2024-01-01T00:00:00.000Z",
+                                       "site_id": 32,
+                                       "site_product_id": 453,
+                                       "type": "ticket",
+                                       "comments": [
+                                           {
+                                               "id": 179,
+                                               "ticket_id": 21,
+                                               "user_id": 1,
+                                               "comment_text": "Hello John, Thank you for reaching out.",
+                                               "draft": false,
+                                               "type": "comment",
+                                               "timestamp": "2024-05-30T14:06:02.347Z",
+                                               "related_parts": [],
+                                               "video_links": [],
+                                               "user": {
+                                                   "name": "Service Agent",
+                                                   "user_type": "agent"
+                                               }
+                                           }
+                                       ],
+                                       "user": {
+                                           "name": "Client User",
+                                           "user_type": "user"
+                                       }
+                                   }
+                               ]
+                           }
+                       }
+                   },
+                   "401": {
+                       "description": "",
+                       "content": {
+                           "application/json": {
+                               "example": {
+                                   "message": "Unauthorized",
+                                   "statusCode": 401
+                               }
+                           }
+                       }
+                   }
+               },
+               "tags": [
+                   "Find Tickets"
+               ],
+               "security": [
+                   {
+                       "bearer": []
+                   }
+               ]
+           }
+       },
+       "/ticket/model/{model_number}/part/{part_number}": {
+           "get": {
+               "operationId": "TicketController_findManyByModelPart",
+               "summary": "Find tickets by model and part number",
+               "description": "This endpoint allows you to get all tickets against a model and part number. (combined query)",
+               "parameters": [
+                   {
+                       "name": "model_number",
+                       "required": true,
+                       "in": "path",
+                       "schema": {
+                           "type": "string"
+                       }
+                   },
+                   {
+                       "name": "part_number",
+                       "required": true,
+                       "in": "path",
+                       "schema": {
+                           "type": "string"
+                       }
+                   }
+               ],
+               
+               "servers": [
+                   {
+                       "url": "https://tickets-api.macaan.ai/"
+                   }, { "url": "https://tickets-api.dev.macaan.ai/" }
+               ],
+               "responses": {
+                   "200": {
+                       "description": "",
+                       "content": {
+                           "application/json": {
+                               "example": [
+                                   {
+                                       "id": 21,
+                                       "user_id": 9,
+                                       "part_id": "Part Number",
+                                       "model_id": "Model Number",
+                                       "ticket_text": "Question submitted by user",
+                                       "visibility": "Public",
+                                       "status": "Publish",
+                                       "created_at": "2024-01-01T00:00:00.000Z",
+                                       "site_id": 32,
+                                       "site_product_id": 453,
+                                       "type": "ticket",
+                                       "comments": [
+                                           {
+                                               "id": 179,
+                                               "ticket_id": 21,
+                                               "user_id": 1,
+                                               "comment_text": "Hello John, Thank you for reaching out.",
+                                               "draft": false,
+                                               "type": "comment",
+                                               "timestamp": "2024-05-30T14:06:02.347Z",
+                                               "related_parts": [],
+                                               "video_links": [],
+                                               "user": {
+                                                   "name": "Service Agent",
+                                                   "user_type": "agent"
+                                               }
+                                           }
+                                       ],
+                                       "user": {
+                                           "name": "Client User",
+                                           "user_type": "user"
+                                       }
+                                   }
+                               ]
+                           }
+                       }
+                   },
+                   "401": {
+                       "description": "",
+                       "content": {
+                           "application/json": {
+                               "example": {
+                                   "message": "Unauthorized",
+                                   "statusCode": 401
+                               }
+                           }
+                       }
+                   }
+               },
+               "tags": [
+                   "Find Tickets"
+               ],
+               "security": [
+                   {
+                       "bearer": []
+                   }
+               ]
+           }
+       },
+       "/ticket/{id}": {
+           "get": {
+               "operationId": "TicketController_findOne",
+               "summary": "Find tickets by id",
+               "description": "This endpoint allows you to find a ticket with unique id.",
+               "parameters": [
+                   {
+                       "name": "id",
+                       "required": true,
+                       "in": "path",
+                       "schema": {
+                           "type": "number"
+                       }
+                   }
+               ],
+               
+               "servers": [
+                   {
+                       "url": "https://tickets-api.macaan.ai/"
+                   }, { "url": "https://tickets-api.dev.macaan.ai/" }
+               ],
+               "responses": {
+                   "200": {
+                       "description": "",
+                       "content": {
+                           "application/json": {
+                               "example": {
+                                   "id": 21,
+                                   "user_id": 9,
+                                   "part_id": "Part Number",
+                                   "model_id": "Model Number",
+                                   "ticket_text": "Question submitted by user",
+                                   "visibility": "Public",
+                                   "status": "Publish",
+                                   "created_at": "2024-01-01T00:00:00.000Z",
+                                   "site_id": 32,
+                                   "site_product_id": 453,
+                                   "type": "ticket",
+                                   "comments": [
+                                       {
+                                           "id": 179,
+                                           "ticket_id": 21,
+                                           "user_id": 1,
+                                           "comment_text": "Hello John, Thank you for reaching out.",
+                                           "draft": false,
+                                           "type": "comment",
+                                           "timestamp": "2024-05-30T14:06:02.347Z",
+                                           "related_parts": [],
+                                           "video_links": [],
+                                           "user": {
+                                               "name": "Service Agent",
+                                               "user_type": "agent"
+                                           }
+                                       }
+                                   ],
+                                   "user": {
+                                       "name": "Client User",
+                                       "user_type": "user"
+                                   }
+                               }
+                           }
+                       }
+                   },
+                   "401": {
+                       "description": "",
+                       "content": {
+                           "application/json": {
+                               "example": {
+                                   "message": "Unauthorized",
+                                   "statusCode": 401
+                               }
+                           }
+                       }
+                   }
+               },
+               "tags": [
+                   "Find Tickets"
+               ],
+               "security": [
+                   {
+                       "bearer": []
+                   }
+               ]
+           }
+       },
+       "/comment": {
+           "post": {
+               "operationId": "CommentController_create",
+               "summary": "Submit a comment",
+               "description": "This endpoint allows you to submit a comment on a ticket",
+               "parameters": [],
+               "requestBody": {
+                   "required": true,
+                   "content": {
+                       "application/json": {
+                           "schema": {
+                               "$ref": "#/components/schemas/CreateCommentDto"
+                           }
+                       }
+                   }
+               },
+               
+               "servers": [
+                   {
+                       "url": "https://tickets-api.macaan.ai/"
+                   }, { "url": "https://tickets-api.dev.macaan.ai/" }
+               ],
+               "responses": {
+                   "201": {
+                       "description": "",
+                       "content": {
+                           "application/json": {
+                               "example": {
+                                   "id": 509,
+                                   "comment_text": "This is a comment",
+                                   "ticket_id": 21,
+                                   "user_id": 3,
+                                   "related_parts": {},
+                                   "video_links": {},
+                                   "draft": false,
+                                   "timestamp": "2023-12-31T19:00:00.000Z",
+                                   "user": {
+                                       "id": 3,
+                                       "name": "John",
+                                       "email": "john@example.com",
+                                       "user_type": "agent"
+                                   }
+                               }
+                           }
+                       }
+                   },
+                   "401": {
+                       "description": "",
+                       "content": {
+                           "application/json": {
+                               "example": {
+                                   "message": "Unauthorized",
+                                   "statusCode": 401
+                               }
+                           }
+                       }
+                   }
+               },
+               "tags": [
+                   "Tickets Comments"
+               ],
+               "security": [
+                   {
+                       "bearer": []
+                   }
+               ]
+           }
+       },
+       "/get_answer": {
+           "post": {
+               "summary": "Get an answer from the AI model.",
+               "tags": [
+                   "RemoteSense Agent"
+               ],
+               "requestBody": {
+                   "required": true,
+                   "content": {
+                       "application/json": {
+                           "schema": {
+                               "type": "object",
+                               "properties": {
+                                   "model_id": {
+                                       "type": "string",
+                                       "description": "The ID of the AI model.",
+                                       "example": "model_123"
+                                   },
+                                   "prompt": {
+                                       "type": "string",
+                                       "description": "The prompt for the AI model.",
+                                       "example": "What is the capital of France?"
+                                   }
+                               }
+                           }
+                       }
+                   }
+               },
+               "responses": {
+                   "200": {
+                     "description": "",
+                       "content": {
+                           "application/json": {
+                               "schema": {
+                                   "type": "object",
+                                   "properties": {
+                                       "answer": {
+                                           "type": "string",
+                                           "description": "The answer generated by the AI model.",
+                                           "example": "The capital of France is Paris."
+                                       }
+                                   }
+                               }
+                           }
+                       }
+                   },
+                   "400": {
+                     "description": "",
+                       "content": {
+                           "application/json": {
+                               "schema": {
+                                   "type": "object",
+                                   "properties": {
+                                       "error": {
+                                           "type": "string",
+                                           "description": "Error message",
+                                           "example": "Missing model_id or prompt"
+                                       }
+                                   }
+                               }
+                           }
+                       }
+                   }
+               },
+               "servers": [
+                   {
+                       "url": "https://pipelines-api.macaan.ai/"
+                   }
+               ]
+           }
+       },
+       "/get_smart_answer": {
+           "post": {
+               "summary": "Get an answer from Docsense.",
+               "tags": [
+                   "DocSense Agent"
+               ],
+               "servers": [
+                   {
+                       "url": "https://pipelines-api.macaan.ai/"
+                   }
+               ],
+               "requestBody": {
+                   "required": true,
+                   "content": {
+                       "application/json": {
+                           "schema": {
+                               "type": "object",
+                               "properties": {
+                                   "model_id": {
+                                       "type": "string",
+                                       "description": "The ID of the AI model.",
+                                       "example": "model_123"
+                                   },
+                                   "prompt": {
+                                       "type": "string",
+                                       "description": "The prompt for the AI model.",
+                                       "example": "What is the capital of France?"
+                                   }
+                               }
+                           }
+                       }
+                   }
+               },
+               "responses": {
+                   "200": {
+                     "description": "",
+                       "content": {
+                           "application/json": {
+                               "schema": {
+                                   "type": "object",
+                                   "properties": {
+                                       "answer": {
+                                           "type": "string",
+                                           "description": "The answer generated by the AI model.",
+                                           "example": "The capital of France is Paris."
+                                       }
+                                   }
+                               }
+                           }
+                       }
+                   },
+                   "400": {
+                     "description": "",
+                       "content": {
+                           "application/json": {
+                               "schema": {
+                                   "type": "object",
+                                   "properties": {
+                                       "error": {
+                                           "type": "string",
+                                           "description": "Error message",
+                                           "example": "Missing model_id or prompt"
+                                       }
+                                   }
+                               }
+                           }
+                       }
+                   }
+               }
+           }
+       },
+       "/product/assets/{asset-id}": {
+      "get": {
+        "tags": [
+          "Manuals and Documents"
+        ],
+        "summary": "Get all connected models",
+        "description": "This endpoint allows users to retrieve all connected models associated with a specific asset (Manual/Doc). The <code>asset-id</code> is required to query the database and fetch the relevant details.",
+        "parameters": [
+          {
+            "name": "asset-id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],"servers" :[{
+                    "url": "https://products-api.macaan.ai/"
+                }, {
+                    "url": "https://products-api.dev.macaan.ai/"
+                }],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "required": [
+                      "model_id",
+                      "model_number"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "model_id": {
+                        "type": "integer",
+                        "format": "int64"
+                      },
+                      "model_number": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              },
+              "application/transit+msgpack": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "required": [
+                      "model_id",
+                      "model_number"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "model_id": {
+                        "type": "integer",
+                        "format": "int64"
+                      },
+                      "model_number": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              },
+              "application/transit+json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "required": [
+                      "model_id",
+                      "model_number"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "model_id": {
+                        "type": "integer",
+                        "format": "int64"
+                      },
+                      "model_number": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              },
+              "application/edn": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "required": [
+                      "model_id",
+                      "model_number"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "model_id": {
+                        "type": "integer",
+                        "format": "int64"
+                      },
+                      "model_number": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "error",
+                    "message"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "error": "Not Found",
+                  "message": "No model found for given Asset ID"
+                }
+              },
+              "application/transit+msgpack": {
+                "schema": {
+                  "required": [
+                    "error",
+                    "message"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "application/transit+json": {
+                "schema": {
+                  "required": [
+                    "error",
+                    "message"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "application/edn": {
+                "schema": {
+                  "required": [
+                    "error",
+                    "message"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/product/categories": {
+      "get": {
+        "tags": [
+          "Categories"
+        ],
+        "summary": "List of all categories.",
+        "description": "This endpoint allows users to retrieve a comprehensive list of all categories available in the system. Categories represent different classifications or groups into which appliances are organized.","servers" :[{
+                    "url": "https://products-api.macaan.ai/"
+                }, {
+                    "url": "https://products-api.dev.macaan.ai/"
+                }],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "category"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "category": {
+                      "type": "array",
+                      "items": {
+                        "required": [
+                          "icon",
+                          "id",
+                          "name",
+                          "parent_id"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "format": "uuid"
+                          },
+                          "name": {
+                            "type": "string",
+                            "nullable": true
+                          },
+                          "icon": {
+                            "type": "string",
+                            "nullable": true
+                          },
+                          "parent_id": {
+                            "type": "string",
+                            "format": "uuid",
+                            "nullable": true
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "application/transit+msgpack": {
+                "schema": {
+                  "required": [
+                    "category"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "category": {
+                      "type": "array",
+                      "items": {
+                        "required": [
+                          "icon",
+                          "id",
+                          "name",
+                          "parent_id"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "format": "uuid"
+                          },
+                          "name": {
+                            "type": "string",
+                            "nullable": true
+                          },
+                          "icon": {
+                            "type": "string",
+                            "nullable": true
+                          },
+                          "parent_id": {
+                            "type": "string",
+                            "format": "uuid",
+                            "nullable": true
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "application/transit+json": {
+                "schema": {
+                  "required": [
+                    "category"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "category": {
+                      "type": "array",
+                      "items": {
+                        "required": [
+                          "icon",
+                          "id",
+                          "name",
+                          "parent_id"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "format": "uuid"
+                          },
+                          "name": {
+                            "type": "string",
+                            "nullable": true
+                          },
+                          "icon": {
+                            "type": "string",
+                            "nullable": true
+                          },
+                          "parent_id": {
+                            "type": "string",
+                            "format": "uuid",
+                            "nullable": true
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "application/edn": {
+                "schema": {
+                  "required": [
+                    "category"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "category": {
+                      "type": "array",
+                      "items": {
+                        "required": [
+                          "icon",
+                          "id",
+                          "name",
+                          "parent_id"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "format": "uuid"
+                          },
+                          "name": {
+                            "type": "string",
+                            "nullable": true
+                          },
+                          "icon": {
+                            "type": "string",
+                            "nullable": true
+                          },
+                          "parent_id": {
+                            "type": "string",
+                            "format": "uuid",
+                            "nullable": true
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/product/codes": {
+      "get": {
+        "tags": [
+          "Error Codes",
+          "Error Codes"
+        ],
+        "summary": "Retrieve Error Code Details",
+        "description": "Fetch detailed information for a specific error code by its unique identifier. This endpoint allows users to search for error code details, providing comprehensive information including code, description, and related troubleshooting steps. Users can search by <code>manufacture_id</code>, <code>category_id</code>, or <code>error code</code>. Additionally, these parameters can be combined to refine the search results.",
+        "parameters": [
+          {
+            "name": "manufacture_id",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "category_id",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "code",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],"servers" :[{
+                    "url": "https://products-api.macaan.ai/"
+                }, {
+                    "url": "https://products-api.dev.macaan.ai/"
+                }],
+        "responses": {
+          "200": {
+            "description": "Detailed information about the error code.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "required": [
+                      "code",
+                      "id",
+                      "part_1",
+                      "part_2",
+                      "part_3",
+                      "problem",
+                      "solution"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "format": "int64"
+                      },
+                      "code": {
+                        "type": "string"
+                      },
+                      "problem": {
+                        "type": "string"
+                      },
+                      "solution": {
+                        "type": "string"
+                      },
+                      "part_1": {
+                        "type": "string"
+                      },
+                      "part_2": {
+                        "type": "string"
+                      },
+                      "part_3": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              },
+              "application/transit+msgpack": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "required": [
+                      "code",
+                      "id",
+                      "part_1",
+                      "part_2",
+                      "part_3",
+                      "problem",
+                      "solution"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "format": "int64"
+                      },
+                      "code": {
+                        "type": "string"
+                      },
+                      "problem": {
+                        "type": "string"
+                      },
+                      "solution": {
+                        "type": "string"
+                      },
+                      "part_1": {
+                        "type": "string"
+                      },
+                      "part_2": {
+                        "type": "string"
+                      },
+                      "part_3": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              },
+              "application/transit+json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "required": [
+                      "code",
+                      "id",
+                      "part_1",
+                      "part_2",
+                      "part_3",
+                      "problem",
+                      "solution"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "format": "int64"
+                      },
+                      "code": {
+                        "type": "string"
+                      },
+                      "problem": {
+                        "type": "string"
+                      },
+                      "solution": {
+                        "type": "string"
+                      },
+                      "part_1": {
+                        "type": "string"
+                      },
+                      "part_2": {
+                        "type": "string"
+                      },
+                      "part_3": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              },
+              "application/edn": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "required": [
+                      "code",
+                      "id",
+                      "part_1",
+                      "part_2",
+                      "part_3",
+                      "problem",
+                      "solution"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "format": "int64"
+                      },
+                      "code": {
+                        "type": "string"
+                      },
+                      "problem": {
+                        "type": "string"
+                      },
+                      "solution": {
+                        "type": "string"
+                      },
+                      "part_1": {
+                        "type": "string"
+                      },
+                      "part_2": {
+                        "type": "string"
+                      },
+                      "part_3": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Error code not found. The search did not return any results for the provided identifier.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "error",
+                    "message"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "error": "Not Found",
+                  "message": "No Code detail found for search item"
+                }
+              },
+              "application/transit+msgpack": {
+                "schema": {
+                  "required": [
+                    "error",
+                    "message"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "application/transit+json": {
+                "schema": {
+                  "required": [
+                    "error",
+                    "message"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "application/edn": {
+                "schema": {
+                  "required": [
+                    "error",
+                    "message"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/product/manufactures": {
+      "get": {
+        "tags": [
+          "Manufactures",
+          "Manufactures"
+        ],
+        "summary": "List of all manufactures",
+        "description": "Retrieve a comprehensive list of all manufactures stored in the database. This endpoint allows users to access information about each manufacture, including their names, unique identifiers, and associated categories. The search can be refined using query parameters such as <code>manufacture_id</code>, <code>manufacture name</code>, or any other specific criteria.",
+        "parameters": [
+          {
+            "name": "search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],"servers" :[{
+                    "url": "https://products-api.macaan.ai/"
+                }, {
+                    "url": "https://products-api.dev.macaan.ai/"
+                }],
+        "responses": {
+          "200": {
+            "description": "A list of manufactures with their details.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "required": [
+                      "id",
+                      "name"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "format": "uuid"
+                      },
+                      "name": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              },
+              "application/transit+msgpack": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "required": [
+                      "id",
+                      "name"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "format": "uuid"
+                      },
+                      "name": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              },
+              "application/transit+json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "required": [
+                      "id",
+                      "name"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "format": "uuid"
+                      },
+                      "name": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              },
+              "application/edn": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "required": [
+                      "id",
+                      "name"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "format": "uuid"
+                      },
+                      "name": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No manufactures found. The search did not return any results for the provided criteria.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "error",
+                    "message"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "error": "Not Found",
+                  "message": "No manufactures found for the search criteria"
+                }
+              },
+              "application/transit+msgpack": {
+                "schema": {
+                  "required": [
+                    "error",
+                    "message"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "application/transit+json": {
+                "schema": {
+                  "required": [
+                    "error",
+                    "message"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "application/edn": {
+                "schema": {
+                  "required": [
+                    "error",
+                    "message"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/product/manufactures/{manufacture-id}/categories": {
+      "get": {
+        "tags": [
+          "Manufactures",
+          "Manufactures"
+        ],
+        "summary": "Get all categories of a manufacture by ID",
+        "description": "Retrieve a list of all categories associated with a specific manufacture. You need to provide the <code>manufacture-id</code> in the path to get the categories related to that manufacture.",
+        "parameters": [
+          {
+            "name": "manufacture-id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],"servers" :[{
+                    "url": "https://products-api.macaan.ai/"
+                }, {
+                    "url": "https://products-api.dev.macaan.ai/"
+                }],
+        "responses": {
+          "200": {
+            "description": "A list of categories associated with the specified manufacture.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "categories"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "categories": {
+                      "type": "array",
+                      "items": {
+                        "required": [
+                          "description",
+                          "id",
+                          "name"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "format": "uuid"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "description": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "application/transit+msgpack": {
+                "schema": {
+                  "required": [
+                    "categories"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "categories": {
+                      "type": "array",
+                      "items": {
+                        "required": [
+                          "description",
+                          "id",
+                          "name"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "format": "uuid"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "description": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "application/transit+json": {
+                "schema": {
+                  "required": [
+                    "categories"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "categories": {
+                      "type": "array",
+                      "items": {
+                        "required": [
+                          "description",
+                          "id",
+                          "name"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "format": "uuid"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "description": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "application/edn": {
+                "schema": {
+                  "required": [
+                    "categories"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "categories": {
+                      "type": "array",
+                      "items": {
+                        "required": [
+                          "description",
+                          "id",
+                          "name"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "format": "uuid"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "description": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No categories found for the provided manufacture ID.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "error",
+                    "message"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "error": "Not Found",
+                  "message": "No categories found for the specified manufacture ID"
+                }
+              },
+              "application/transit+msgpack": {
+                "schema": {
+                  "required": [
+                    "error",
+                    "message"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "application/transit+json": {
+                "schema": {
+                  "required": [
+                    "error",
+                    "message"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "application/edn": {
+                "schema": {
+                  "required": [
+                    "error",
+                    "message"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/product/models/{model-id}": {
+      "get": {
+        "tags": [
+          "Models",
+          "Models"
+        ],
+        "summary": "Retrieve Model Details by ID",
+        "description": "Fetch detailed information for a specific model using its unique <code>model-id</code>. The response includes various details about the model, including its description, stock photo, diagrams, and associated manufacture information.",
+        "parameters": [
+          {
+            "name": "model-id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],"servers" :[{
+                    "url": "https://products-api.macaan.ai/"
+                }, {
+                    "url": "https://products-api.dev.macaan.ai/"
+                }],
+        "responses": {
+          "200": {
+            "description": "Detailed information about the specified model, including its description, stock photo, diagrams, and manufacture information.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "available_assets",
+                    "available_exploded_diagrams",
+                    "available_parts",
+                    "category_icon",
+                    "category_name",
+                    "diagram_status",
+                    "error_code",
+                    "interactive_exploded_diagrams",
+                    "manufacture_logo",
+                    "manufacture_name",
+                    "model_description",
+                    "model_id",
+                    "model_name",
+                    "model_number",
+                    "model_stock_photo"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "available_parts": {
+                      "type": "integer",
+                      "format": "int64"
+                    },
+                    "error_code": {
+                      "type": "boolean"
+                    },
+                    "model_stock_photo": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "interactive_exploded_diagrams": {
+                      "type": "integer",
+                      "format": "int64"
+                    },
+                    "category_icon": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "model_number": {
+                      "type": "string"
+                    },
+                    "manufacture_name": {
+                      "type": "string"
+                    },
+                    "available_exploded_diagrams": {
+                      "type": "integer",
+                      "format": "int64"
+                    },
+                    "model_name": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "category_name": {
+                      "type": "string"
+                    },
+                    "diagram_status": {
+                      "type": "string"
+                    },
+                    "model_id": {
+                      "type": "integer",
+                      "format": "int64"
+                    },
+                    "manufacture_logo": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "available_assets": {
+                      "type": "integer",
+                      "format": "int64"
+                    },
+                    "model_description": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "application/transit+msgpack": {
+                "schema": {
+                  "required": [
+                    "available_assets",
+                    "available_exploded_diagrams",
+                    "available_parts",
+                    "category_icon",
+                    "category_name",
+                    "diagram_status",
+                    "error_code",
+                    "interactive_exploded_diagrams",
+                    "manufacture_logo",
+                    "manufacture_name",
+                    "model_description",
+                    "model_id",
+                    "model_name",
+                    "model_number",
+                    "model_stock_photo"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "available_parts": {
+                      "type": "integer",
+                      "format": "int64"
+                    },
+                    "error_code": {
+                      "type": "boolean"
+                    },
+                    "model_stock_photo": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "interactive_exploded_diagrams": {
+                      "type": "integer",
+                      "format": "int64"
+                    },
+                    "category_icon": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "model_number": {
+                      "type": "string"
+                    },
+                    "manufacture_name": {
+                      "type": "string"
+                    },
+                    "available_exploded_diagrams": {
+                      "type": "integer",
+                      "format": "int64"
+                    },
+                    "model_name": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "category_name": {
+                      "type": "string"
+                    },
+                    "diagram_status": {
+                      "type": "string"
+                    },
+                    "model_id": {
+                      "type": "integer",
+                      "format": "int64"
+                    },
+                    "manufacture_logo": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "available_assets": {
+                      "type": "integer",
+                      "format": "int64"
+                    },
+                    "model_description": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "application/transit+json": {
+                "schema": {
+                  "required": [
+                    "available_assets",
+                    "available_exploded_diagrams",
+                    "available_parts",
+                    "category_icon",
+                    "category_name",
+                    "diagram_status",
+                    "error_code",
+                    "interactive_exploded_diagrams",
+                    "manufacture_logo",
+                    "manufacture_name",
+                    "model_description",
+                    "model_id",
+                    "model_name",
+                    "model_number",
+                    "model_stock_photo"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "available_parts": {
+                      "type": "integer",
+                      "format": "int64"
+                    },
+                    "error_code": {
+                      "type": "boolean"
+                    },
+                    "model_stock_photo": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "interactive_exploded_diagrams": {
+                      "type": "integer",
+                      "format": "int64"
+                    },
+                    "category_icon": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "model_number": {
+                      "type": "string"
+                    },
+                    "manufacture_name": {
+                      "type": "string"
+                    },
+                    "available_exploded_diagrams": {
+                      "type": "integer",
+                      "format": "int64"
+                    },
+                    "model_name": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "category_name": {
+                      "type": "string"
+                    },
+                    "diagram_status": {
+                      "type": "string"
+                    },
+                    "model_id": {
+                      "type": "integer",
+                      "format": "int64"
+                    },
+                    "manufacture_logo": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "available_assets": {
+                      "type": "integer",
+                      "format": "int64"
+                    },
+                    "model_description": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "application/edn": {
+                "schema": {
+                  "required": [
+                    "available_assets",
+                    "available_exploded_diagrams",
+                    "available_parts",
+                    "category_icon",
+                    "category_name",
+                    "diagram_status",
+                    "error_code",
+                    "interactive_exploded_diagrams",
+                    "manufacture_logo",
+                    "manufacture_name",
+                    "model_description",
+                    "model_id",
+                    "model_name",
+                    "model_number",
+                    "model_stock_photo"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "available_parts": {
+                      "type": "integer",
+                      "format": "int64"
+                    },
+                    "error_code": {
+                      "type": "boolean"
+                    },
+                    "model_stock_photo": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "interactive_exploded_diagrams": {
+                      "type": "integer",
+                      "format": "int64"
+                    },
+                    "category_icon": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "model_number": {
+                      "type": "string"
+                    },
+                    "manufacture_name": {
+                      "type": "string"
+                    },
+                    "available_exploded_diagrams": {
+                      "type": "integer",
+                      "format": "int64"
+                    },
+                    "model_name": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "category_name": {
+                      "type": "string"
+                    },
+                    "diagram_status": {
+                      "type": "string"
+                    },
+                    "model_id": {
+                      "type": "integer",
+                      "format": "int64"
+                    },
+                    "manufacture_logo": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "available_assets": {
+                      "type": "integer",
+                      "format": "int64"
+                    },
+                    "model_description": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Model not found. The search did not return any results for the provided model ID.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "error",
+                    "message"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "error": "Not Found",
+                  "message": "No details found for the specified model ID"
+                }
+              },
+              "application/transit+msgpack": {
+                "schema": {
+                  "required": [
+                    "error",
+                    "message"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "application/transit+json": {
+                "schema": {
+                  "required": [
+                    "error",
+                    "message"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "application/edn": {
+                "schema": {
+                  "required": [
+                    "error",
+                    "message"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/product/models/{model-id}/assets": {
+      "get": {
+        "tags": [
+          "Models",
+          "Models"
+        ],
+        "summary": "Get All Assets of a Model",
+        "description": "Retrieve a comprehensive list of all documents and assets associated with a specific model. To use this endpoint, provide the <code>model-id</code> as a path parameter. The response includes various types of documents related to the model, such as the Owner's Manual, Energy Guide, Specification Sheet, Installation Instructions, Troubleshooting Guide, and Dimension Guide.",
+        "parameters": [
+          {
+            "name": "model-id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],"servers" :[{
+                    "url": "https://products-api.macaan.ai/"
+                }, {
+                    "url": "https://products-api.dev.macaan.ai/"
+                }],
+        "responses": {
+          "200": {
+            "description": "A list of documents and assets associated with the specified model, including Owner's Manual, Energy Guide, Specification Sheet, Installation Instructions, Troubleshooting Guide, and Dimension Guide.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "required": [
+                      "description",
+                      "id",
+                      "type",
+                      "url"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "format": "int64"
+                      },
+                      "type": {
+                        "type": "string"
+                      },
+                      "url": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              },
+              "application/transit+msgpack": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "required": [
+                      "description",
+                      "id",
+                      "type",
+                      "url"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "format": "int64"
+                      },
+                      "type": {
+                        "type": "string"
+                      },
+                      "url": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              },
+              "application/transit+json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "required": [
+                      "description",
+                      "id",
+                      "type",
+                      "url"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "format": "int64"
+                      },
+                      "type": {
+                        "type": "string"
+                      },
+                      "url": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              },
+              "application/edn": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "required": [
+                      "description",
+                      "id",
+                      "type",
+                      "url"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "format": "int64"
+                      },
+                      "type": {
+                        "type": "string"
+                      },
+                      "url": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No assets found for the provided model ID. The search did not return any results for the specified model.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "error",
+                    "message"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "error": "Not Found",
+                  "message": "No assets found for the specified model ID"
+                }
+              },
+              "application/transit+msgpack": {
+                "schema": {
+                  "required": [
+                    "error",
+                    "message"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "application/transit+json": {
+                "schema": {
+                  "required": [
+                    "error",
+                    "message"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "application/edn": {
+                "schema": {
+                  "required": [
+                    "error",
+                    "message"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/product/models/{model-id}/exploded": {
+      "get": {
+        "tags": [
+          "Models",
+          "Models"
+        ],
+        "summary": "Get All Exploded Diagrams of a Model",
+        "description": "Retrieve a comprehensive list of all exploded diagrams associated with a specific model. To use this endpoint, provide the <code>model-id</code> as a path parameter. The response includes details of each exploded diagram related to the model, such as diagram identifiers, titles, and related images.",
+        "parameters": [
+          {
+            "name": "model-id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],"servers" :[{
+                    "url": "https://products-api.macaan.ai/"
+                }, {
+                    "url": "https://products-api.dev.macaan.ai/"
+                }],
+        "responses": {
+          "200": {
+            "description": "A list of exploded diagrams associated with the specified model.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "required": [
+                      "id",
+                      "status",
+                      "title",
+                      "url"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "format": "int64"
+                      },
+                      "title": {
+                        "type": "string"
+                      },
+                      "url": {
+                        "type": "string"
+                      },
+                      "status": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              },
+              "application/transit+msgpack": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "required": [
+                      "id",
+                      "status",
+                      "title",
+                      "url"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "format": "int64"
+                      },
+                      "title": {
+                        "type": "string"
+                      },
+                      "url": {
+                        "type": "string"
+                      },
+                      "status": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              },
+              "application/transit+json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "required": [
+                      "id",
+                      "status",
+                      "title",
+                      "url"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "format": "int64"
+                      },
+                      "title": {
+                        "type": "string"
+                      },
+                      "url": {
+                        "type": "string"
+                      },
+                      "status": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              },
+              "application/edn": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "required": [
+                      "id",
+                      "status",
+                      "title",
+                      "url"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "format": "int64"
+                      },
+                      "title": {
+                        "type": "string"
+                      },
+                      "url": {
+                        "type": "string"
+                      },
+                      "status": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No exploded diagrams found for the provided model ID. The search did not return any results for the specified model.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "error",
+                    "message"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "error": "Not Found",
+                  "message": "No exploded diagrams found for the specified model ID"
+                }
+              },
+              "application/transit+msgpack": {
+                "schema": {
+                  "required": [
+                    "error",
+                    "message"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "application/transit+json": {
+                "schema": {
+                  "required": [
+                    "error",
+                    "message"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "application/edn": {
+                "schema": {
+                  "required": [
+                    "error",
+                    "message"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/product/models/{model-id}/interactive-exploded": {
+      "get": {
+        "tags": [
+          "Models",
+          "Models"
+        ],
+        "summary": "Get All Interactive Exploded Diagrams of a Model",
+        "description": "Retrieve a comprehensive list of all interactive exploded diagrams related to a specific model. To use this endpoint, provide the <code>model-id</code> as a path parameter. The response includes details for each interactive exploded diagram, such as diagram identifiers, titles, and interactive features.",
+        "parameters": [
+          {
+            "name": "model-id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],"servers" :[{
+                    "url": "https://products-api.macaan.ai/"
+                }, {
+                    "url": "https://products-api.dev.macaan.ai/"
+                }],
+        "responses": {
+          "200": {
+            "description": "A list of interactive exploded diagrams associated with the specified model, including their images and interactive features.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "required": [
+                      "id",
+                      "status",
+                      "title",
+                      "url"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "format": "int64"
+                      },
+                      "title": {
+                        "type": "string"
+                      },
+                      "url": {
+                        "type": "string"
+                      },
+                      "status": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              },
+              "application/transit+msgpack": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "required": [
+                      "id",
+                      "status",
+                      "title",
+                      "url"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "format": "int64"
+                      },
+                      "title": {
+                        "type": "string"
+                      },
+                      "url": {
+                        "type": "string"
+                      },
+                      "status": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              },
+              "application/transit+json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "required": [
+                      "id",
+                      "status",
+                      "title",
+                      "url"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "format": "int64"
+                      },
+                      "title": {
+                        "type": "string"
+                      },
+                      "url": {
+                        "type": "string"
+                      },
+                      "status": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              },
+              "application/edn": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "required": [
+                      "id",
+                      "status",
+                      "title",
+                      "url"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "format": "int64"
+                      },
+                      "title": {
+                        "type": "string"
+                      },
+                      "url": {
+                        "type": "string"
+                      },
+                      "status": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No interactive exploded diagrams found for the provided model ID. The search did not return any results for the specified model.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "error",
+                    "message"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "error": "Not Found",
+                  "message": "No interactive exploded diagrams found for the specified model ID"
+                }
+              },
+              "application/transit+msgpack": {
+                "schema": {
+                  "required": [
+                    "error",
+                    "message"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "application/transit+json": {
+                "schema": {
+                  "required": [
+                    "error",
+                    "message"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "application/edn": {
+                "schema": {
+                  "required": [
+                    "error",
+                    "message"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/product/models/{model-id}/parts": {
+      "get": {
+        "tags": [
+          "Models",
+          "Models"
+        ],
+        "summary": "Get all parts of model",
+        "description": "Retrieve a comprehensive list of all parts associated with a specific model. To use this endpoint, provide the <code>model-id</code> as a path parameter. The response includes details of all parts related to the model, such as part numbers, part name and manufacture.",
+        "parameters": [
+          {
+            "name": "model-id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],"servers" :[{
+                    "url": "https://products-api.macaan.ai/"
+                }, {
+                    "url": "https://products-api.dev.macaan.ai/"
+                }],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "parts"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "parts": {
+                      "type": "array",
+                      "items": {
+                        "required": [
+                          "id",
+                          "manufacture_name",
+                          "part_name",
+                          "part_number",
+                          "total_model_count"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "format": "int64"
+                          },
+                          "part_name": {
+                            "type": "string"
+                          },
+                          "part_number": {
+                            "type": "string"
+                          },
+                          "manufacture_name": {
+                            "type": "string"
+                          },
+                          "total_model_count": {
+                            "type": "integer",
+                            "format": "int64"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "application/transit+msgpack": {
+                "schema": {
+                  "required": [
+                    "parts"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "parts": {
+                      "type": "array",
+                      "items": {
+                        "required": [
+                          "id",
+                          "manufacture_name",
+                          "part_name",
+                          "part_number",
+                          "total_model_count"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "format": "int64"
+                          },
+                          "part_name": {
+                            "type": "string"
+                          },
+                          "part_number": {
+                            "type": "string"
+                          },
+                          "manufacture_name": {
+                            "type": "string"
+                          },
+                          "total_model_count": {
+                            "type": "integer",
+                            "format": "int64"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "application/transit+json": {
+                "schema": {
+                  "required": [
+                    "parts"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "parts": {
+                      "type": "array",
+                      "items": {
+                        "required": [
+                          "id",
+                          "manufacture_name",
+                          "part_name",
+                          "part_number",
+                          "total_model_count"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "format": "int64"
+                          },
+                          "part_name": {
+                            "type": "string"
+                          },
+                          "part_number": {
+                            "type": "string"
+                          },
+                          "manufacture_name": {
+                            "type": "string"
+                          },
+                          "total_model_count": {
+                            "type": "integer",
+                            "format": "int64"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "application/edn": {
+                "schema": {
+                  "required": [
+                    "parts"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "parts": {
+                      "type": "array",
+                      "items": {
+                        "required": [
+                          "id",
+                          "manufacture_name",
+                          "part_name",
+                          "part_number",
+                          "total_model_count"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "format": "int64"
+                          },
+                          "part_name": {
+                            "type": "string"
+                          },
+                          "part_number": {
+                            "type": "string"
+                          },
+                          "manufacture_name": {
+                            "type": "string"
+                          },
+                          "total_model_count": {
+                            "type": "integer",
+                            "format": "int64"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No parts found that match the provided search criteria.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "error",
+                    "message"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "error": "Not Found",
+                  "message": "No parts found for the model ID"
+                }
+              },
+              "application/transit+msgpack": {
+                "schema": {
+                  "required": [
+                    "error",
+                    "message"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "application/transit+json": {
+                "schema": {
+                  "required": [
+                    "error",
+                    "message"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "application/edn": {
+                "schema": {
+                  "required": [
+                    "error",
+                    "message"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/product/parts": {
+      "get": {
+        "tags": [
+          "Parts"
+        ],
+        "summary": "Search List of All Parts",
+        "description": "Retrieve a list of parts based on various search criteria. You can search by <code>manufacture_id</code>, <code>category_id</code>, <code>offset</code>, <code>number</code>, and <code>name</code>. These parameters can be used individually or in combination to refine the search results.",
+        "parameters": [
+          {
+            "name": "manufacture_id",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "category_id",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "number",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],"servers" :[{
+                    "url": "https://products-api.macaan.ai/"
+                }, {
+                    "url": "https://products-api.dev.macaan.ai/"
+                }],
+        "responses": {
+          "200": {
+            "description": "A list of parts that match the search criteria. Each part includes details such as part ID, name, manufacture ID, category ID, and other relevant information.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "required": [
+                      "category_id",
+                      "id",
+                      "manufacture_id",
+                      "name",
+                      "number"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "format": "int64"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "number": {
+                        "type": "string"
+                      },
+                      "manufacture_id": {
+                        "type": "string",
+                        "format": "uuid"
+                      },
+                      "category_id": {
+                        "type": "string",
+                        "format": "uuid"
+                      }
+                    }
+                  }
+                }
+              },
+              "application/transit+msgpack": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "required": [
+                      "category_id",
+                      "id",
+                      "manufacture_id",
+                      "name",
+                      "number"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "format": "int64"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "number": {
+                        "type": "string"
+                      },
+                      "manufacture_id": {
+                        "type": "string",
+                        "format": "uuid"
+                      },
+                      "category_id": {
+                        "type": "string",
+                        "format": "uuid"
+                      }
+                    }
+                  }
+                }
+              },
+              "application/transit+json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "required": [
+                      "category_id",
+                      "id",
+                      "manufacture_id",
+                      "name",
+                      "number"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "format": "int64"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "number": {
+                        "type": "string"
+                      },
+                      "manufacture_id": {
+                        "type": "string",
+                        "format": "uuid"
+                      },
+                      "category_id": {
+                        "type": "string",
+                        "format": "uuid"
+                      }
+                    }
+                  }
+                }
+              },
+              "application/edn": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "required": [
+                      "category_id",
+                      "id",
+                      "manufacture_id",
+                      "name",
+                      "number"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "format": "int64"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "number": {
+                        "type": "string"
+                      },
+                      "manufacture_id": {
+                        "type": "string",
+                        "format": "uuid"
+                      },
+                      "category_id": {
+                        "type": "string",
+                        "format": "uuid"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No parts found that match the provided search criteria.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "error",
+                    "message"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "error": "Not Found",
+                  "message": "No parts found for the specified search parameters"
+                }
+              },
+              "application/transit+msgpack": {
+                "schema": {
+                  "required": [
+                    "error",
+                    "message"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "application/transit+json": {
+                "schema": {
+                  "required": [
+                    "error",
+                    "message"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "application/edn": {
+                "schema": {
+                  "required": [
+                    "error",
+                    "message"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/product/parts/{part-id}": {
+      "get": {
+        "tags": [
+          "Parts"
+        ],
+        "summary": "Retrieve part by id",
+        "parameters": [
+          {
+            "name": "part-id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],"servers" :[{
+                    "url": "https://products-api.macaan.ai/"
+                }, {
+                    "url": "https://products-api.dev.macaan.ai/"
+                }],
+        "responses": {
+          "default": {
+            "description": "",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/product/parts/{part-id}/exploded": {
+      "get": {
+        "tags": [
+          "Parts",
+          "Parts"
+        ],
+        "summary": "Get All Exploded Diagrams of a Part",
+        "description": "Retrieve a comprehensive list of all exploded diagrams related to a specific part. To use this endpoint, provide the <code>part-id</code> as a path parameter. The response includes details for each exploded diagram associated with the part, such as diagram identifiers, titles, and related images.",
+        "parameters": [
+          {
+            "name": "part-id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],"servers" :[{
+                    "url": "https://products-api.macaan.ai/"
+                }, {
+                    "url": "https://products-api.dev.macaan.ai/"
+                }],
+        "responses": {
+          "200": {
+            "description": "A list of exploded diagrams associated with the specified part.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "required": [
+                      "coordinates",
+                      "id",
+                      "number",
+                      "status",
+                      "title",
+                      "url"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "format": "int64"
+                      },
+                      "url": {
+                        "type": "string"
+                      },
+                      "title": {
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "status": {
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "number": {
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "coordinates": {
+                        "type": "string",
+                        "nullable": true
+                      }
+                    }
+                  }
+                }
+              },
+              "application/transit+msgpack": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "required": [
+                      "coordinates",
+                      "id",
+                      "number",
+                      "status",
+                      "title",
+                      "url"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "format": "int64"
+                      },
+                      "url": {
+                        "type": "string"
+                      },
+                      "title": {
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "status": {
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "number": {
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "coordinates": {
+                        "type": "string",
+                        "nullable": true
+                      }
+                    }
+                  }
+                }
+              },
+              "application/transit+json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "required": [
+                      "coordinates",
+                      "id",
+                      "number",
+                      "status",
+                      "title",
+                      "url"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "format": "int64"
+                      },
+                      "url": {
+                        "type": "string"
+                      },
+                      "title": {
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "status": {
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "number": {
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "coordinates": {
+                        "type": "string",
+                        "nullable": true
+                      }
+                    }
+                  }
+                }
+              },
+              "application/edn": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "required": [
+                      "coordinates",
+                      "id",
+                      "number",
+                      "status",
+                      "title",
+                      "url"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "format": "int64"
+                      },
+                      "url": {
+                        "type": "string"
+                      },
+                      "title": {
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "status": {
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "number": {
+                        "type": "string",
+                        "nullable": true
+                      },
+                      "coordinates": {
+                        "type": "string",
+                        "nullable": true
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No exploded diagrams found for the provided part ID. The search did not return any results for the specified part.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "error",
+                    "message"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "error": "Not Found",
+                  "message": "No exploded diagrams found for the specified part ID"
+                }
+              },
+              "application/transit+msgpack": {
+                "schema": {
+                  "required": [
+                    "error",
+                    "message"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "application/transit+json": {
+                "schema": {
+                  "required": [
+                    "error",
+                    "message"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "application/edn": {
+                "schema": {
+                  "required": [
+                    "error",
+                    "message"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/product/parts/{part-id}/models": {
+      "get": {
+        "tags": [
+          "Parts",
+          "Parts"
+        ],
+        "summary": "Get All Models of a Part",
+        "description": "Retrieve a comprehensive list of all models that use a specific part. To use this endpoint, provide the <code>part-id</code> as a path parameter. The response includes details for each model associated with the part, such as model identifiers, names, and descriptions.",
+        "parameters": [
+          {
+            "name": "part-id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],"servers" :[{
+                    "url": "https://products-api.macaan.ai/"
+                }, {
+                    "url": "https://products-api.dev.macaan.ai/"
+                }],
+        "responses": {
+          "200": {
+            "description": "A list of models associated with the specified part.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "models",
+                    "total-result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "total-result": {
+                      "type": "integer",
+                      "format": "int64"
+                    },
+                    "models": {
+                      "type": "array",
+                      "items": {
+                        "required": [
+                          "id",
+                          "model_number"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "format": "int64"
+                          },
+                          "model_number": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "application/transit+msgpack": {
+                "schema": {
+                  "required": [
+                    "models",
+                    "total-result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "total-result": {
+                      "type": "integer",
+                      "format": "int64"
+                    },
+                    "models": {
+                      "type": "array",
+                      "items": {
+                        "required": [
+                          "id",
+                          "model_number"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "format": "int64"
+                          },
+                          "model_number": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "application/transit+json": {
+                "schema": {
+                  "required": [
+                    "models",
+                    "total-result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "total-result": {
+                      "type": "integer",
+                      "format": "int64"
+                    },
+                    "models": {
+                      "type": "array",
+                      "items": {
+                        "required": [
+                          "id",
+                          "model_number"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "format": "int64"
+                          },
+                          "model_number": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "application/edn": {
+                "schema": {
+                  "required": [
+                    "models",
+                    "total-result"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "total-result": {
+                      "type": "integer",
+                      "format": "int64"
+                    },
+                    "models": {
+                      "type": "array",
+                      "items": {
+                        "required": [
+                          "id",
+                          "model_number"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "format": "int64"
+                          },
+                          "model_number": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No models found for the provided part ID. The search did not return any results for the specified part.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "error",
+                    "message"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "error": "Not Found",
+                  "message": "No models found for the specified part ID"
+                }
+              },
+              "application/transit+msgpack": {
+                "schema": {
+                  "required": [
+                    "error",
+                    "message"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "application/transit+json": {
+                "schema": {
+                  "required": [
+                    "error",
+                    "message"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "application/edn": {
+                "schema": {
+                  "required": [
+                    "error",
+                    "message"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/product/parts/{part-id}/replace-parts": {
+      "get": {
+        "tags": [
+          "Parts",
+          "Parts"
+        ],
+        "summary": "Get Replacement Parts of a Part",
+        "description": "Retrieve a comprehensive list of all parts that can replace a specific part. To use this endpoint, provide the <code>part-id</code> as a path parameter. The response includes details for each replacement part, such as part identifiers and names.",
+        "parameters": [
+          {
+            "name": "part-id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],"servers" :[{
+                    "url": "https://products-api.macaan.ai/"
+                }, {
+                    "url": "https://products-api.dev.macaan.ai/"
+                }],
+        "responses": {
+          "200": {
+            "description": "A list of replacement parts associated with the specified part.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "required": [
+                      "id",
+                      "number"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "format": "int64"
+                      },
+                      "number": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              },
+              "application/transit+msgpack": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "required": [
+                      "id",
+                      "number"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "format": "int64"
+                      },
+                      "number": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              },
+              "application/transit+json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "required": [
+                      "id",
+                      "number"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "format": "int64"
+                      },
+                      "number": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              },
+              "application/edn": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "required": [
+                      "id",
+                      "number"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "format": "int64"
+                      },
+                      "number": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No replacement parts found for the provided part ID. The search did not return any results for the specified part.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "required": [
+                    "error",
+                    "message"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "example": {
+                  "error": "Not Found",
+                  "message": "No replacement parts found for the specified part ID"
+                }
+              },
+              "application/transit+msgpack": {
+                "schema": {
+                  "required": [
+                    "error",
+                    "message"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "application/transit+json": {
+                "schema": {
+                  "required": [
+                    "error",
+                    "message"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "application/edn": {
+                "schema": {
+                  "required": [
+                    "error",
+                    "message"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+   },
+   "info": {
+       "title": "OnSense APIs",
+       "description": "<p>The <strong>OnSense APIs</strong> provides a robust and comprehensive solution for managing both appliance-related data and customer interactions. It efficiently handles <strong>appliance models</strong>, <strong>parts</strong>, <strong>error codes</strong>, <strong>technical manuals</strong>, <strong>exploded diagrams</strong>, <strong>customer inquiries</strong>, <strong>support tickets</strong>, <strong>AI agents</strong>, <strong>chat</strong>, <strong>logs</strong>, and <strong>service history</strong>, enabling effective management, troubleshooting, and improved customer satisfaction.</p><p>Organized around <strong>REST</strong>, the API supports <strong>JSON</strong>, <strong>EDN</strong>, and <strong>Transit</strong> formats, offering flexibility for developers. Access is secured via <strong>authorization tokens</strong>, ensuring only authorized users can interact with the API.</p><p>To access the API, click the 'Authorize' button and enter your token in the format: <code>Bearer auth-token</code>.</p><p>To facilitate your experience, we have developed a web UI where you can review and interact with the API. Explore it at <a href='https://try.macaan.ai/' target='_blank'>https://try.macaan.ai/</a>.</p><p>For any further questions or to discuss the API in more detail, please contact your account representative to schedule a technical consultation.</p>",
+       "version": "1.0",
+       "contact": {}
+   },
+   "tags": [],
+   "servers": [],
+   "components": {
+       "securitySchemes": {
+           "bearer": {
+               "scheme": "bearer",
+               "bearerFormat": "JWT",
+               "type": "http"
+           }
+       },
+       "schemas": {
+           "CreateTicketDto": {
+               "type": "object",
+               "properties": {
+                   "ticket_text": {
+                       "type": "string",
+                       "example": "This is a ticket"
+                   },
+                   "part_id": {
+                       "type": "string",
+                       "example": "ARP-223"
+                   },
+                   "model_id": {
+                       "type": "string",
+                       "example": "KHM323223"
+                   },
+                   "status": {
+                       "type": "string",
+                       "example": "Pending"
+                   },
+                   "visibility": {
+                       "type": "string",
+                       "example": "Public"
+                   },
+                   "site_id": {
+                       "type": "number",
+                       "example": 32
+                   },
+                   "site_product_id": {
+                       "type": "number",
+                       "example": 453
+                   },
+                   "name": {
+                       "type": "string",
+                       "example": "John"
+                   },
+                   "email": {
+                       "type": "string",
+                       "example": "john@example.com"
+                   },
+                   "created_at": {
+                       "type": "string",
+                       "example": "01-01-2024"
+                   },
+                   "type": {
+                       "type": "string",
+                       "example": "ticket"
+                   }
+               },
+               "required": [
+                   "ticket_text",
+                   "part_id",
+                   "model_id",
+                   "status",
+                   "visibility",
+                   "site_id",
+                   "site_product_id",
+                   "name",
+                   "email",
+                   "created_at",
+                   "type"
+               ]
+           },
+           "CreateCommentDto": {
+               "type": "object",
+               "properties": {
+                   "ticket_id": {
+                       "type": "number",
+                       "example": 12
+                   },
+                   "user_id": {
+                       "type": "number",
+                       "example": 3
+                   },
+                   "comment_text": {
+                       "type": "string",
+                       "example": "This is a comment"
+                   },
+                   "user_type": {
+                       "type": "string",
+                       "example": "agent"
+                   },
+                   "related_parts": {
+                       "type": "object",
+                       "example": {}
+                   },
+                   "video_links": {
+                       "type": "object",
+                       "example": {}
+                   },
+                   "draft": {
+                       "type": "boolean",
+                       "example": false
+                   },
+                   "type": {
+                       "type": "string",
+                       "example": "comment"
+                   },
+                   "name": {
+                       "type": "string",
+                       "example": "John"
+                   },
+                   "email": {
+                       "type": "string",
+                       "example": "john@example.com"
+                   },
+                   "timestamp": {
+                       "type": "string",
+                       "example": "01-01-2024"
+                   }
+               },
+               "required": [
+                   "ticket_id",
+                   "user_id",
+                   "comment_text",
+                   "user_type",
+                   "related_parts",
+                   "video_links",
+                   "draft",
+                   "type",
+                   "name",
+                   "email",
+                   "timestamp"
+               ]
+           }
+       }
+   }
+}

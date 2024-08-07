@@ -4659,7 +4659,6 @@
      "description":"<p>The <strong>OnSense APIs</strong> provides a robust and comprehensive solution for managing both appliance-related data and customer interactions. It efficiently handles <strong>appliance models</strong>, <strong>parts</strong>, <strong>error codes</strong>, <strong>technical manuals</strong>, <strong>exploded diagrams</strong>, <strong>customer inquiries</strong>, <strong>support tickets</strong>, <strong>AI agents</strong>, <strong>chat</strong>, <strong>logs</strong>, and <strong>service history</strong>, enabling effective management, troubleshooting, and improved customer satisfaction.</p><p>Organized around <strong>REST</strong>, the API supports <strong>JSON</strong>, <strong>EDN</strong>, and <strong>Transit</strong> formats, offering flexibility for developers. Access is secured via <strong>authorization tokens</strong>, ensuring only authorized users can interact with the API.</p><p>To access the API, click the 'Authorize' button and enter your token in the format: <code>Bearer auth-token</code>.</p><p>To facilitate your experience, we have developed a web UI where you can review and interact with the API. Explore it at <a href='https://try.macaan.ai/' target='_blank'>https://try.macaan.ai/</a>.</p><p>For any further questions or to discuss the API in more detail, please contact your account representative to schedule a technical consultation.</p>",
      "version":"1.0",
      "contact":{
-        
      }
   },
   "tags":[

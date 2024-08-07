@@ -15,6 +15,13 @@
       *{
         font-family: "Open Sans", sans-serif;
       }
+      body{
+        background-color: #f5f5f5;
+      }
+      .swagger-ui .scheme-container {
+          background: transparent;
+          box-shadow: none !important;
+      }
       .swagger-ui .topbar-wrapper a {
         content: url(logo-white.png);
         height: 50px;
@@ -30,13 +37,14 @@
       .download-url-wrapper, .topbar{
         display: none !important;
       }
-      .swagger-ui .information-container.wrapper p {
+      .swagger-ui .information-container.wrapper p,
+      .swagger-ui .information-container.wrapper a {
           line-height: 1.5;
           font-size: 15px;
           /* font-weight: 300; */
       }
       .swagger-ui .information-container.wrapper strong {
-          font-weight: 600;
+          font-weight: 700;
       }
       .swagger-ui .opblock-tag {
           font-weight: 600;
@@ -46,13 +54,17 @@
           font-weight: 600;
           font-size: 15px;
       }
+      .swagger-ui .markdown code, .swagger-ui .renderedMarkdown code{
+        color: #000000;
+      }
       /* .swagger-ui .info .title,
       .swagger-ui .information-container.wrapper p{
         color:#fff;
       } */
       .swagger-ui .information-container.wrapper {
           background: #fff;
-          padding: 1px 20px;
+          box-shadow: -1px 14px 10px -10px rgba(0, 0, 0, .15);
+          padding: 1px 25px;
       }
       .main::before {
           content: "";
@@ -68,7 +80,7 @@
         display: none;
       }
       .scheme-container {
-          margin-top: -60px !important;
+          margin-top: -90px !important;
       }
       .swagger-ui .opblock-tag {
         background-color: transparent !important;
@@ -79,6 +91,20 @@
         padding: 20px 0;
         align-items: center;
         justify-content: center;
+    }
+    .swagger-ui .opblock {
+        border-radius: 0 !important;
+        box-shadow: none;
+    }
+    .swagger-ui .opblock .opblock-summary{
+      padding: 0;
+    }
+    .swagger-ui .opblock .opblock-summary-method {
+      padding: 10px 10px;
+      border-radius: 0 !important;
+    }
+    .opblock-tag-section.is-open {
+        border-bottom: 2px solid #e6e5e5;
     }
     </style>
   </head>

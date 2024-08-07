@@ -120,7 +120,7 @@
               ]
           }
       },
-      "/product/search/models/{model-number}": {
+      "/product/models": {
           "get": {
               "summary": "Search by model number",
               "tags": [
@@ -131,24 +131,29 @@
                   "ProductEngine: Part Compatibility",
                   "ProductEngine: Manuals & Documents"
               ],
-              "description": "",
+              "description": "Search for models using the required model number. Each variant is treated as a distinct entity with its own model number. The model number is essential for retrieving detailed information and accessing further data in our system.",
               "responses": {
                   "200": {
-                      "description": "",
-                      "content": {
-                          "application/json": {
-                              "example": [
-                                  {
-                                      "model_id": 285542,
-                                      "model_description": "{\"length\":17.25,\"width\":29.87,\"depth\":15.25}",
-                                      "model_number": "KHMC1857WBL0",
-                                      "manufacture_name": "KitchenAid",
-                                      "category_name": "Microwave",
-                                      "model_stock_photo": "KitchenAid-KHMC1857WBL0-stock-photo.jpg"
+                      "schema": {
+                          "type": "array",
+                          "items": {
+                              "type": "object",
+                              "properties": {
+                                  "model_id": {
+                                      "type": "integer",
+                                      "format": "int64"
+                                  },
+                                  "model_number": {
+                                      "type": "string"
                                   }
+                              },
+                              "required": [
+                                  "model_id",
+                                  "model_number"
                               ]
                           }
-                      }
+                      },
+                      "description": ""
                   },
                   "401": {
                       "description": "",
@@ -159,17 +164,46 @@
                               }
                           }
                       }
+                  },
+                  "404": {
+                      "examples": {
+                          "application/json": {
+                              "error": "Not Found",
+                              "message": "No details found for the specified model ID"
+                          }
+                      },
+                      "schema": {
+                          "type": "object",
+                          "properties": {
+                              "error": {
+                                  "type": "string"
+                              },
+                              "message": {
+                                  "type": "string"
+                              }
+                          },
+                          "required": [
+                              "error",
+                              "message"
+                          ]
+                      },
+                      "description": ""
                   }
               },
               "parameters": [
                   {
-                      "in": "path",
-                      "name": "model-number",
+                      "in": "query",
+                      "name": "number",
                       "description": "",
-                      "required": true,
-                      "schema": {
-                          "type": "string"
-                      }
+                      "type": "string",
+                      "required": true
+                  },
+                  {
+                      "in": "query",
+                      "name": "variant",
+                      "description": "",
+                      "type": "string",
+                      "required": false
                   }
               ],
               "servers": [

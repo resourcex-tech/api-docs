@@ -4693,20 +4693,19 @@
     },
     "tags": [],
     "servers": [],
-    "securitySchemes": {
-        "api_key": {
-            "type": "apiKey",
-            "name": "Authorization",
-            "in": "header"
-        }
-    },
-    "security": [
-        {
-            "api_key": []
-        }
-    ],
     "components": {
-        
+        "securitySchemes": {
+            "api_key": {
+                "type": "apiKey",
+                "name": "Authorization",
+                "in": "header"
+            }
+        },
+        "security": [
+            {
+                "api_key": []
+            }
+        ],
         "schemas": {
             "CreateTicketDto": {
                 "type": "object",

@@ -235,9 +235,9 @@
                                 "type": "object",
                                 "properties": {
                                     "model_id": {
-                                        "type": "string",
+                                        "type": "number",
                                         "description": "The ID of the AI model.",
-                                        "example": "model_123"
+                                        "example": 123
                                     },
                                     "prompt": {
                                         "type": "string",
@@ -316,9 +316,9 @@
                                 "type": "object",
                                 "properties": {
                                     "model_id": {
-                                        "type": "string",
+                                        "type": "number",
                                         "description": "The ID of the AI model.",
-                                        "example": "model_123"
+                                        "example": 123
                                     },
                                     "prompt": {
                                         "type": "string",

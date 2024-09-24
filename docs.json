@@ -2162,6 +2162,14 @@
                 "tags": [
                     "TagEngine"
                 ],
+                "servers": [
+                    {
+                        "url": "https://products-api.macaan.ai/"
+                    },
+                    {
+                        "url": "https://products-api.dev.macaan.ai/"
+                    }
+                ],
                 "summary": "Get exploded diagram and its parts by id.",
                 "description": "Retrieve the exploded diagram image URL, its title, and all associated part numbers and their coordinates. To use this endpoint, `model-id` and `view-id` are required. The `variant-id` is optional, but if provided, it will return the variant-specific exploded diagram if available.",
                 "parameters": [
@@ -2289,7 +2297,12 @@
                             }
                         }
                     }
-                }
+                },
+                "security": [
+                    {
+                        "api_key": []
+                    }
+                ]
             }
             
         },

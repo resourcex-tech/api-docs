@@ -230,6 +230,11 @@
             "required": false,
             "format": "uuid"
           }
+        ],
+        "security": [
+          {
+            "api_key": []
+          }
         ]
       }
     },
@@ -2371,7 +2376,7 @@
         ],
         "security": [
           {
-            "bearer": []
+            "api_key": []
           }
         ]
       }
@@ -2460,7 +2465,7 @@
         ],
         "security": [
           {
-            "bearer": []
+            "api_key": []
           }
         ]
       }
@@ -2557,7 +2562,7 @@
         ],
         "security": [
           {
-            "bearer": []
+            "api_key": []
           }
         ]
       }
@@ -2644,7 +2649,7 @@
         ],
         "security": [
           {
-            "bearer": []
+            "api_key": []
           }
         ]
       }
@@ -2714,7 +2719,7 @@
         ],
         "security": [
           {
-            "bearer": []
+            "api_key": []
           }
         ]
       }
@@ -2734,11 +2739,6 @@
         "type": "apiKey",
         "name": "Authorization",
         "in": "header"
-      },
-      "bearer": {
-        "scheme": "bearer",
-        "bearerFormat": "JWT",
-        "type": "http"
       }
     },
     "schemas": {

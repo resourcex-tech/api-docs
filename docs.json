@@ -2788,7 +2788,7 @@
           "metadata": {
             "type": "object",
             "example": {}
-          }
+          },
           "external_id": {
             "type": "number",
             "example": 4

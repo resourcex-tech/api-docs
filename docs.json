@@ -2757,17 +2757,9 @@
             "type": "string",
             "example": "KHM323223"
           },
-          "status": {
-            "type": "string",
-            "example": "Pending"
-          },
           "visibility": {
             "type": "string",
             "example": "Public"
-          },
-          "site_id": {
-            "type": "number",
-            "example": 32
           },
           "site_product_id": {
             "type": "number",
@@ -2780,10 +2772,6 @@
           "email": {
             "type": "string",
             "example": "john@example.com"
-          },
-          "created_at": {
-            "type": "string",
-            "example": "01-01-2024"
           },
           "type": {
             "type": "string",
@@ -2804,19 +2792,7 @@
         },
         "required": [
           "ticket_text",
-          "part_id",
-          "model_id",
-          "status",
-          "visibility",
-          "site_id",
-          "site_product_id",
-          "name",
-          "email",
-          "created_at",
-          "type",
-          "category",
-          "manufacturer",
-          "metadata"
+          "name"
         ]
       },
       "CreateCommentDto": {

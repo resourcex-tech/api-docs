@@ -2789,11 +2789,15 @@
             "type": "object",
             "example": {}
           }
+          "external_id": {
+            "type": "number",
+            "example": 4
+          }
         },
         "required": [
           "ticket_text",
           "name"
-        ]
+        ],
       },
       "CreateCommentDto": {
         "type": "object",
